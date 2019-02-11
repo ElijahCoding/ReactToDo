@@ -5,14 +5,18 @@ import Todos from './components/Todos'
 import AddTodo from './components/AddTodo'
 import About from './components/pages/About'
 import uuid from 'uuid'
+import axios from 'axios'
 
 import './App.css';
 
 class App extends Component {
     state = {
-        todos: [
-            
-        ]
+        todos: []
+    }
+
+    componentDidMount () {
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+             .then(response => this.setState({ todos: response.data }))
     }
 
     markComplete = (id) => {
